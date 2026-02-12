@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scaledown=1.0">
+<title>Siri ❤️</title>
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(185deg, red, pink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        font-family: "Comic Sans MS", cursive;
+    }
+    #main {
+        position: fixed;
+        font-size: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        width: 90%;
+        max-width: 500px;
+        height: 350px;
+        border-radius: 40px;
+        background: white;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+    .cont {
+        display: flex;
+        gap: 40px; 
+    }
+    button {
+        padding: 12px 25px;
+        font-size: 18px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+    button:hover {
+        transform: scale(1.2);
+    }
+    #yes {
+        background: linear-gradient(135deg, rgb(227, 0, 38), rgb(246, 235, 237));
+        color: white;
+    }
+
+    #no {
+        background: linear-gradient(-135deg, rgb(45, 35, 37), rgb(246, 235, 237));
+    }
+    #record-player{
+        position: fixed;
+        font-size: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        width: 90%;
+        max-width: 500px;
+        height: 350px;
+        border-radius: 40px;
+        background: white;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        opacity: 0;
+    }
+    .heart {
+    position: fixed;
+    color: pink;
+    font-size: 20px;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.7;
+    }
+    @keyframes floatUp {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-60vh);
+        opacity: 0;
+    }}
+    #disc{
+        background: linear-gradient(-185deg, rgb(0, 0, 0),rgb(0, 0, 0) 50%,rgb(255, 255, 255)100%);
+        width: 200px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 150px 150px 150px 150px ;
+        animation: spin 3s linear infinite;
+    }
+    #inner{
+        background: red;
+        width: 60px ;
+        height: 60px;
+        border-radius: 40px 40px 40px 40px;
+    }
+    #needle{
+        position: relative;
+        right: 25%;
+        top: -55%;
+        width: 140px;
+        height: 13px;
+        rotate: -90deg;
+        clip-path: polygon(0% 0%, 100% 40%, 100% 60%, 0% 100%);
+        background: linear-gradient(-270deg, rgb(6, 6, 6),rgb(155, 154, 154));
+    }
+    @keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+ #text{
+    position: relative;
+    margin-top: 15px;
+    font-size: 23px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    border-right: 3px solid black;
+    width: fit-content;
+    overflow: hidden;
+    animation: blink 2s infinite;
+    color: black;
+ }
+ @keyframes blink{
+    0%{border-color:black ;}
+    50%{border-color: white;}
+    100%{border-color: black;}
+ }
+</style>
+</head>
+<body>
+    <div  id="record-player">
+              <div id="disc">
+                   <div id="inner"></div>
+                   <audio id="audio" src="main-siri.mp4"></audio>
+              </div>
+              <div id="needle"></div>
+              <p id="text"></p>
+        </div>
+    <div id="main">
+        <p>Will you be my valentine?? 🥺</p>
+
+        <div class="cont">
+            <button id="yes">Yes 💓</button>
+            <button id="no">No 💔</button>
+        </div>
+    </div>
+<script>
+    var scaledown = 0.5
+    var scaleup = 1.3
+    const record = document.getElementById("record-player")
+    const needle =  document.getElementById("needle")
+    const nobutton = document.getElementById("no");
+    const yesbutton = document.getElementById("yes")
+    const text = document.getElementById("text")
+    const words = "Now Playing:  My Confessions ❤️"
+    let i = 0
+    function typetext(){
+        if(i<words.length){
+            text.innerHTML += words.charAt(i)
+            i++
+            setTimeout(typetext,90)
+        }
+    }
+    document.addEventListener("mousemove", function(e) {
+        const rect = nobutton.getBoundingClientRect();
+        if (e.clientX > rect.left &&e.clientX < rect.right &&e.clientY > rect.top &&e.clientY < rect.bottom
+        ) {
+            moveButton();
+        }
+    });
+    nobutton.addEventListener("click",()=>{
+        yesbutton.style.transform = "scale("+scaleup+")"
+        nobutton.style.transform = "scale("+scaledown+")"
+        scaledown -= 0.1
+        scaleup += 0.1
+    })
+    yesbutton.addEventListener("click",()=>{
+        document.getElementById("main").style.transition = "2s"
+        document.getElementById("main").style.opacity = "0"
+        setTimeout(()=>{
+            record.style.transition = "3s"
+            record.style.opacity = "1"
+            needle.style.transition = "4s"
+            needle.style.rotate = "45deg"
+            typetext()
+            document.getElementById("audio").play()
+        },3000)
+        setTimeout(()=>{
+            document.getElementById("main").style.display = "none"
+        },8000)
+    })
+    function moveButton() {
+        nobutton.style.position = "fixed";
+        const maxX = window.innerWidth - nobutton.offsetWidth;
+        const maxY = window.innerHeight - nobutton.offsetHeight;
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+        nobutton.style.left = randomX + "px";
+        nobutton.style.top = randomY + "px";
+    }
+    function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+setInterval(createHeart, 500);
+</script>
+</body>
+</html>
