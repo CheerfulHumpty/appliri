@@ -56,22 +56,22 @@
         background: linear-gradient(-135deg, rgb(45, 35, 37), rgb(246, 235, 237));
     }
     #record-player{
-        position: fixed;
-        font-size: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 25px;
-        width: 90%;
-        max-width: 500px;
-        height: 350px;
-        border-radius: 40px;
-        background: white;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        opacity: 0;
-    }
+    position: fixed;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    width: 90%;
+    max-width: 500px;
+    min-height: 350px;
+    border-radius: 40px;
+    background: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    opacity: 0;
+}
     .heart {
     position: fixed;
     color: pink;
@@ -106,15 +106,16 @@
         border-radius: 40px 40px 40px 40px;
     }
     #needle{
-        position: relative;
-        right: 25%;
-        top: -55%;
-        width: 140px;
-        height: 13px;
-        rotate: -90deg;
-        clip-path: polygon(0% 0%, 100% 40%, 100% 60%, 0% 100%);
-        background: linear-gradient(-270deg, rgb(6, 6, 6),rgb(155, 154, 154));
-    }
+    position: absolute;
+    top: 150px;
+    right: 270px;
+    width: 140px;
+    height: 13px;
+    transform: rotate(-90deg);
+    clip-path: polygon(0% 0%, 100% 40%, 100% 60%, 0% 100%);
+    background: linear-gradient(-270deg, rgb(6, 6, 6), rgb(155, 154, 154));
+    transform-origin: left center;
+}
     @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -123,18 +124,22 @@
         transform: rotate(360deg);
     }
 }
- #text{
+#text{
     position: relative;
-    margin-top: 15px;
-    font-size: 23px;
+    font-size: 18px;
     letter-spacing: 1px;
-    white-space: nowrap;
     border-right: 3px solid black;
-    width: fit-content;
-    overflow: hidden;
+    width: 90%;
+    max-width: 420px;
+    height: 100px;       
+    overflow-y: auto;      
+    overflow-x: hidden;
+    white-space: pre-wrap;  
+    word-break: break-word;
     animation: blink 2s infinite;
     color: black;
- }
+    line-height: 1.5;
+}
  @keyframes blink{
     0%{border-color:black ;}
     50%{border-color: white;}
@@ -167,7 +172,71 @@
     const nobutton = document.getElementById("no");
     const yesbutton = document.getElementById("yes")
     const text = document.getElementById("text")
-    const words = "Now Playing:  My Heart ❤️"
+    const words = `opening my eyes to a quiet sight
+thinking about the day we met twice 
+I took a deep sigh
+ready to take a dive
+into a week of forced smiles
+
+Looking at the day gone by
+I remember the night
+a night of wonder and smiles
+your face, always so bright 
+makes the sun shy
+your words always so sweet...
+and yet the depth of which
+leaves Shakespeare in retreat
+the shirt you wore that evening 
+ever so perfect on you
+the fragrance of which haunts my dreams
+and makes my reality a living dream 
+for in the olden days
+they'd call you witch 
+for wooing a man, with just a flick 
+of those brown-beautiful eyes.
+
+As I begin getting ready 
+for a week's misery
+I unpack our memories 
+shared over the course of the that beautiful evening
+the cancelling of the flight, the rushing of time 
+the selfish little heart of mine
+glad to have some more time 
+the ride back in the morning
+felt heavier than the one in the evening
+for the lady had taken her flight 
+but I didn't hold onto tight
+leaving me with just the memories to remember the night
+I took one last breath as you left
+to hold onto the smell that reminds of the angels 
+the one's who ring bells and sing your praises 
+
+my mind knows the rationality 
+behind my heart's insanity
+and yet it doesn't comfort me 
+for it knows that it's futile
+only a morning text makes it right
+As I come out of the shower
+I wonder what's the hour 
+for time moves strange
+when the one's you like become estranged 
+I make a small prayer, to whoever's listening
+to give you whatever you're wishing 
+cause I know they listen 
+for I wished the same 
+and they led me to you
+and I wish they'd do the same for you.
+
+And now the week's gone
+it's the day before you return
+my excitement is high
+I'm waiting to get my eyes on that pretty sight
+for as I much I'd like to say otherwise
+you've changed my mind
+On what I won't say for the time's not right 
+But I do regret not hugging you that night
+for it felt just about right......`;
+  
     let i = 0
     function typetext(){
         if(i<words.length){
@@ -228,4 +297,3 @@ setInterval(createHeart, 500);
 </script>
 </body>
 </html>
-
